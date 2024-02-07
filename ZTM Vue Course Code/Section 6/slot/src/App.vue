@@ -27,7 +27,7 @@
     </template>
   </appForm>
 </template>
-<script >
+<script>
 import AppForm from "./components/form.vue"
 export default {
   name: "App",
