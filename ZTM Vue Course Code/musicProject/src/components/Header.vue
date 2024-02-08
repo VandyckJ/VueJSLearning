@@ -23,12 +23,12 @@
   </header>
 </template>
 <script>
-import { mapStores, mapState, mapWritableState } from 'pinia'
+import { mapState, mapWritableState } from 'pinia'
 import useModalStore from '@/stores/modal'
 export default {
-  name: 'AppHeaader',
+  name: 'AppHeader',
   computed: {
-    ...mapStores(useModalStore),
+    ...mapState(useModalStore, ['hiddenClass']),
     ...mapWritableState(useModalStore, ['isOpen'])
   },
   methods: {
