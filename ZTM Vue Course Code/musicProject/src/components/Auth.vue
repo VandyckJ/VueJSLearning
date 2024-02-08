@@ -192,6 +192,11 @@ export default {
   computed: {
     ...mapState(useModalStore, ['hiddenClass']),
     ...mapWritableState(useModalStore, ['isOpen'])
+  },
+  methods: {
+    register(values) {
+      console.log(values)
+    }
   }
 }
 </script>
