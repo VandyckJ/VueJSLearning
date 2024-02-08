@@ -1,4 +1,11 @@
 <template>
+  <div
+    class="text-white text-center font-bold p-4 mb-4"
+    v-if="reg_show_alert"
+    :class="reg_alert_variant"
+  >
+    {{ reg_alert_msg }}
+  </div>
   <vee-form :validation-schema="schema" @submit="register" :initial-values="userData">
     <!-- Name -->
     <div class="mb-3">
@@ -101,7 +108,6 @@ export default {
   },
   data() {
     return {
-      tab: 'login',
       schema: {
         name: 'required|min:3|max:100|alpha_spaces',
         email: 'required|min:3|max:100|email',
@@ -120,15 +126,16 @@ export default {
       reg_alert_msg: 'Please wait, your account is being created'
     }
   },
-
-  register(values) {
-    this.reg_show_alert = true
-    this.reg_in_submission = true
-    this.reg_alert_variant = 'bg-blue-500'
-    this.reg_alert_msg = 'Please wait, your account is being created'
-    this.reg_alert_variant = 'bg-green-500'
-    this.reg_alert_msg = 'Success, your account has been created'
-    console.log(values)
+  methods: {
+    register(values) {
+      this.reg_show_alert = true
+      this.reg_in_submission = true
+      this.reg_alert_variant = 'bg-blue-500'
+      this.reg_alert_msg = 'Please wait, your account is being created'
+      this.reg_alert_variant = 'bg-green-500'
+      this.reg_alert_msg = 'Success, your account has been created'
+      console.log(values)
+    }
   }
 }
 </script>
