@@ -70,6 +70,7 @@ import { mapState, mapWritableState } from 'pinia'
 import useModalStore from '@/stores/modal'
 import AppLoginForm from '@/components/LoginForm.vue'
 import AppRegisterForm from '@/components/RegisterForm.vue'
+
 export default {
   name: 'Auth',
   components: {

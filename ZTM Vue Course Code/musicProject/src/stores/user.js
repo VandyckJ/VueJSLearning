@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { auth, usersCollection } from '@/includes/firebase'
+import { auth, usersCollection } from '@/includes/firebase.js'
+
 export default defineStore('user', {
   state: () => ({
     userLoggedIn: false
@@ -14,6 +15,7 @@ export default defineStore('user', {
         age: values.age,
         country: values.country
       })
+
       await userCred.user.updateProfile({
         displayName: values.name
       })
@@ -22,7 +24,13 @@ export default defineStore('user', {
     },
     async authenticate(values) {
       await auth.signInWithEmailAndPassword(values.email, values.password)
+
       this.userLoggedIn = true
+    },
+    async signout() {
+      await auth.signOut()
+
+      this.userLoggedIn = false
     }
   }
 })

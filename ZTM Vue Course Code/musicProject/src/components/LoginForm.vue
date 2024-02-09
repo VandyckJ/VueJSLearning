@@ -6,6 +6,7 @@
   >
     {{ login_alert_msg }}
   </div>
+
   <vee-form :validation-schema="loginSchema" @submit="login">
     <!-- Email -->
     <div class="mb-3">
@@ -31,22 +32,20 @@
     </div>
     <button
       type="submit"
-      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
       :disabled="login_in_submission"
+      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
     >
       Submit
     </button>
   </vee-form>
 </template>
+
 <script>
 import { mapActions } from 'pinia'
 import useUserStore from '@/stores/user'
-import { ErrorMessage } from 'vee-validate'
+
 export default {
-  name: 'loginForm',
-  components: {
-    ErrorMessage
-  },
+  name: 'LoginForm',
   data() {
     return {
       loginSchema: {
@@ -56,15 +55,17 @@ export default {
       login_in_submission: false,
       login_show_alert: false,
       login_alert_variant: 'bg-blue-500',
-      login_alert_msg: 'Please wait, you are being logged in.'
+      login_alert_msg: 'Please wait! You are being logged in'
     }
   },
   methods: {
     ...mapActions(useUserStore, ['authenticate']),
     async login(values) {
-      ;(this.login_in_submission = true),
-        (this.login_show_alert = true),
-        (this.login_alert_msg = 'Please wait, you are being logged in.')
+      this.login_in_submission = true
+      this.login_show_alert = true
+      this.login_alert_variant = 'bg-blue-500'
+      this.login_alert_msg = 'Please wait! You are being logged in'
+
       try {
         await this.authenticate(values)
       } catch (error) {
@@ -73,10 +74,10 @@ export default {
         this.login_alert_msg = 'Invalid login details.'
         return
       }
-      this.login_alert_variant = 'bg-blue-500'
+
       this.login_alert_variant = 'bg-green-500'
-      this.login_alert_msg = 'You are now logged in.'
-      console.log(values)
+      this.login_alert_msg = 'Success! You are now logged in.'
+      window.location.reload()
     }
   }
 }
